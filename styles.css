@@ -1,23 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: blanchedalmond;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
+.game-container {
+  width: 750;
+  margin: 0 auto;
 }
 
-.row {
+.container {
   display: flex;
   justify-content: space-around;
-  background: aliceblue;
 }
 
 .card {
-  display: flex;
-  justify-content: space-around;
-  border: 2px solid #000;
-  background: transparent;
-  height: 10px;
-  width: 10px;
+  position: relative;
+  margin: 5px;
+  height: 100px;
+  width: 15%;
+  background: dodgerblue;
+  border: 2px solid firebrick;
+  border-radius: 5px;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  width: 50px;
+  background-image: url('https://cdn6.aptoide.com/imgs/8/7/a/87ac36837a4e526ee6537f076bb2946e_icon.png?w=256');
+  background-size: 100% 100%;
 }
