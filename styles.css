@@ -6,8 +6,8 @@ body {
   background-color: blanchedalmond;
 }
 
-.game-container {
-  width: 750;
+#game-container {
+  width: 750px;
   margin: 0 auto;
 }
 
@@ -16,17 +16,36 @@ body {
   justify-content: space-around;
 }
 
-.card {
-  position: relative;
-  margin: 5px;
+.space {
   height: 100px;
   width: 15%;
-  background: dodgerblue;
-  border: 2px solid firebrick;
-  border-radius: 5px;
+  margin: 5px;
+  perspective: 210px;
 }
 
-.card::before {
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card-face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  background: dodgerblue;
+  border: 2px solid tomato;
+}
+
+.card-back::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -34,12 +53,28 @@ body {
   transform: translate(-50%, -50%);
   height: 50px;
   width: 50px;
-  background-image: url('https://cdn6.aptoide.com/imgs/8/7/a/87ac36837a4e526ee6537f076bb2946e_icon.png?w=256');
+  background-image: url('owls/back.png');
   background-size: 100% 100%;
 }
 
 .card-front {
-  width: 17%;
-  background: firebrick;
+  background: tomato;
   border: 2px solid dodgerblue;
+  transform: rotateY(180deg);
+}
+
+.card-front::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  width: 50px;
+  background-image: ;
+  background-size: 100% 100%;
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
 }
