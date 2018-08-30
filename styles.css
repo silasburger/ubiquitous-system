@@ -26,7 +26,7 @@ body {
   border-radius: 5px;
 }
 
-.card::after {
+.card::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -36,4 +36,10 @@ body {
   width: 50px;
   background-image: url('https://cdn6.aptoide.com/imgs/8/7/a/87ac36837a4e526ee6537f076bb2946e_icon.png?w=256');
   background-size: 100% 100%;
+}
+
+.card-front {
+  width: 17%;
+  background: firebrick;
+  border: 2px solid dodgerblue;
 }
