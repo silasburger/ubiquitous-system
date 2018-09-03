@@ -17,10 +17,11 @@ function newGame() {
 }
 
 function choose() {
-  var closestCard = e.target.closest('.card');
-  var closestSpan = e.target.closest('span');
   var oneFlipped = false;
-  return function() {
+  return function(e) {
+    console.log(e.target);
+    var closestCard = e.target.closest('.card');
+    var closestSpan = closestCard.childNodes[3].childNodes[0];
     if (closestCard.contains(e.target) && !oneFlipped) {
       closestCard.classList.toggle('is-flipped');
       oneFlipped = true;
@@ -29,31 +30,32 @@ function choose() {
       oneFlipped &&
       document.getElementsByClassName('is-flipped')[0].childNodes[3]
         .childNodes[0].style.backgroundImage ===
-        closestSpan.style.backgroundImage
+        closestSpan.style.backgroundImage &&
+      document.getElementsByClassName('is-flipped')[0].childNodes[3]
+        .childNodes[0] !== closestSpan
     ) {
       document.getElementsByClassName('is-flipped')[0].style.transform =
         'rotateY(180deg)';
       closestSpan.parentNode.parentNode.style.transform = 'rotateY(180deg)';
-      document.getElementsByClassName('is-flipped')[0].toggle('is-flipped');
+      document
+        .getElementsByClassName('is-flipped')[0]
+        .classList.toggle('is-flipped');
       oneFlipped = false;
     } else if (closestCard.contains(e.target) && oneFlipped) {
-      document.getElementsByClassName('is-flipped')[0].toggle('is-flipped');
-      closestCard.toggle('is-flipped');
-      Window.setTimeout(function() {
-        closestCard.toggle('is-flipped');
+      oneFlipped = false;
+      closestCard.classList.toggle('is-flipped');
+      window.setTimeout(function() {
+        closestCard.classList.toggle('is-flipped');
+        document
+          .getElementsByClassName('is-flipped')[0]
+          .classList.toggle('is-flipped');
       }, 1000);
     }
   };
 }
 
+var selected = choose();
+
 document.getElementById('new-game').addEventListener('click', newGame);
 
-document
-  .getElementById('game-container')
-  .addEventListener('click', function(e) {
-    var closestCard = e.target.closest('.card');
-    var closestRow = e.target.closest('.container');
-    if (closestCard.contains(e.target) && closestRow.contains(e.target)) {
-      closestCard.classList.toggle('is-flipped');
-    }
-  });
+document.getElementById('game-container').addEventListener('click', selected);
