@@ -22,10 +22,15 @@ function choose() {
     console.log(e.target);
     var closestCard = e.target.closest('.card');
     var closestSpan = closestCard.childNodes[3].childNodes[0];
-    if (closestCard.contains(e.target) && !oneFlipped) {
+    if (
+      closestCard.contains(e.target) &&
+      e.target.classList[0] === 'card-face' &&
+      !oneFlipped
+    ) {
       closestCard.classList.toggle('is-flipped');
       oneFlipped = true;
     } else if (
+      e.target.classList[0] === 'card-face' &&
       closestCard.contains(e.target) &&
       oneFlipped &&
       document.getElementsByClassName('is-flipped')[0].childNodes[3]
@@ -41,7 +46,11 @@ function choose() {
         .getElementsByClassName('is-flipped')[0]
         .classList.toggle('is-flipped');
       oneFlipped = false;
-    } else if (closestCard.contains(e.target) && oneFlipped) {
+    } else if (
+      closestCard.contains(e.target) &&
+      e.target.classList[0] === 'card-face' &&
+      oneFlipped
+    ) {
       oneFlipped = false;
       closestCard.classList.toggle('is-flipped');
       window.setTimeout(function() {
@@ -49,6 +58,9 @@ function choose() {
         document
           .getElementsByClassName('is-flipped')[0]
           .classList.toggle('is-flipped');
+        document.getElementById('score').innerText = String(
+          +document.getElementById('score').innerText + 1
+        );
       }, 1000);
     }
   };
