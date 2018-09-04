@@ -5,15 +5,21 @@ function newGame() {
   var numPool = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   var chosen = [];
   for (let i = 0; i < spans.length; i++) {
-    var random = Math.floor(Math.random() * numPool.length);
-    var pic = 'owls/' + numPool[random] + '.png';
-    spans[i].style.backgroundImage = 'URL(' + pic + ')';
-    if (chosen.includes(numPool[random])) {
-      numPool.splice(random, 1);
-    } else {
-      chosen.push(numPool[random]);
-    }
+    spans[i].closest('.card').style.transform = '';
   }
+  window.setTimeout(function() {
+    for (let i = 0; i < spans.length; i++) {
+      document.getElementById('score').innerText = '0';
+      var random = Math.floor(Math.random() * numPool.length);
+      var pic = 'owls/' + numPool[random] + '.png';
+      spans[i].style.backgroundImage = 'URL(' + pic + ')';
+      if (chosen.includes(numPool[random])) {
+        numPool.splice(random, 1);
+      } else {
+        chosen.push(numPool[random]);
+      }
+    }
+  }, 1000);
 }
 
 function choose(e) {
@@ -40,11 +46,10 @@ function choose(e) {
       closestSpan.style.backgroundImage &&
     flippedCards[0].childNodes[3].childNodes[0] !== closestSpan
   ) {
-    flippedCards[0].style.transform = 'rotateY(180deg)';
-    closestSpan.parentNode.parentNode.style.transform = 'rotateY(180deg)';
-    document
-      .getElementsByClassName('is-flipped')[0]
-      .classList.toggle('is-flipped');
+    flippedCards[0].style.transform = 'rotateY(180deg) scale(1.17)';
+    closestSpan.parentNode.parentNode.style.transform =
+      'rotateY(180deg) scale(1.17)';
+    flippedCards[0].classList.toggle('is-flipped');
   }
 
   //Second flip - Incorrect
