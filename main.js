@@ -11,7 +11,7 @@ function newGame() {
     for (let i = 0; i < spans.length; i++) {
       document.getElementById('score').innerText = '0';
       var random = Math.floor(Math.random() * numPool.length);
-      var pic = '/owls/' + numPool[random] + '.png';
+      var pic = 'owls/' + numPool[random] + '.png';
       spans[i].style.backgroundImage = 'URL(' + pic + ')';
       if (chosen.includes(numPool[random])) {
         numPool.splice(random, 1);
