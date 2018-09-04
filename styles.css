@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  font-family: lato;
+  margin: 0;
 }
 
 body {
@@ -20,7 +22,7 @@ body {
   height: 100px;
   width: 15%;
   margin: 5px;
-  perspective: 210px;
+  perspective: 200px;
 }
 
 .card {
@@ -72,8 +74,51 @@ body {
   width: 100px;
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .card.is-flipped {
   transform: rotateY(180deg);
+}
+
+.btn {
+  background-color: tomato;
+  width: 150px;
+  height: 45px;
+  color: white;
+  margin: 10px 50px;
+  display: inline-block;
+  font-family: lato;
+  font-weight: 300;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 6px firebrick;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.btn:hover {
+  box-shadow: 0 4px firebrick;
+  top: 2px;
+}
+
+.btn:active {
+  top: 6px;
+  box-shadow: none;
+}
+
+.btn:focus {
+  outline: none !important;
+}
+
+h1 {
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  margin: 0px 50px;
+}
+
+.controls-container {
+  text-align: center;
 }

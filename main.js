@@ -1,7 +1,7 @@
 newGame();
 
 function newGame() {
-  var spans = document.querySelectorAll('span');
+  var spans = document.querySelectorAll('.image');
   var numPool = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   var chosen = [];
   for (let i = 0; i < spans.length; i++) {
@@ -22,6 +22,8 @@ function choose() {
     console.log(e.target);
     var closestCard = e.target.closest('.card');
     var closestSpan = closestCard.childNodes[3].childNodes[0];
+
+    //First flip
     if (
       closestCard.contains(e.target) &&
       e.target.classList[0] === 'card-face' &&
@@ -29,7 +31,10 @@ function choose() {
     ) {
       closestCard.classList.toggle('is-flipped');
       oneFlipped = true;
-    } else if (
+    }
+
+    //Second flip - Correct
+    else if (
       e.target.classList[0] === 'card-face' &&
       closestCard.contains(e.target) &&
       oneFlipped &&
@@ -46,7 +51,10 @@ function choose() {
         .getElementsByClassName('is-flipped')[0]
         .classList.toggle('is-flipped');
       oneFlipped = false;
-    } else if (
+    }
+
+    //Second flip - Incorrect
+    else if (
       closestCard.contains(e.target) &&
       e.target.classList[0] === 'card-face' &&
       oneFlipped
@@ -66,8 +74,7 @@ function choose() {
   };
 }
 
+// handlers
 var selected = choose();
-
 document.getElementById('new-game').addEventListener('click', newGame);
-
 document.getElementById('game-container').addEventListener('click', selected);
