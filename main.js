@@ -23,7 +23,6 @@ function newGame() {
 }
 
 function choose(e) {
-  console.log(e.target);
   var closestCard = e.target.closest('.card');
   var closestSpan = closestCard.childNodes[3].childNodes[0];
   var flippedCards = document.getElementsByClassName('is-flipped');
@@ -46,9 +45,8 @@ function choose(e) {
       closestSpan.style.backgroundImage &&
     flippedCards[0].childNodes[3].childNodes[0] !== closestSpan
   ) {
-    flippedCards[0].style.transform = 'rotateY(180deg) scale(1.17)';
-    closestSpan.parentNode.parentNode.style.transform =
-      'rotateY(180deg) scale(1.17)';
+    flippedCards[0].style.transform = 'rotateY(180deg)';
+    closestCard.style.transform = 'rotateY(180deg) rotateX(360deg)';
     flippedCards[0].classList.toggle('is-flipped');
   }
 

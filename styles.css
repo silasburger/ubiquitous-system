@@ -20,8 +20,8 @@ body {
 }
 
 .space {
-  height: 100px;
-  width: 100px;
+  height: 87px;
+  width: 87px;
   margin: 10px;
   perspective: 200px;
 }
@@ -30,7 +30,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 500ms;
+  transition: all 500ms;
   transform-style: preserve-3d;
   cursor: pointer;
 }
@@ -71,15 +71,15 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100px;
-  width: 100px;
+  height: 82px;
+  width: 82px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .card.is-flipped {
-  transform: rotateY(180deg) scale(1.17);
+  transform: rotateY(180deg) scale(1.22);
 }
 
 .btn {
