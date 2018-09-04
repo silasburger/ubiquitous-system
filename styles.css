@@ -56,7 +56,7 @@ body {
   transform: translate(-50%, -50%);
   height: 50px;
   width: 50px;
-  background-image: url('owls/back.png');
+  background-image: url('owls/back-min.png');
   background-size: 100% 100%;
 }
 
