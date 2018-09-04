@@ -16,65 +16,54 @@ function newGame() {
   }
 }
 
-function choose() {
-  var oneFlipped = false;
-  return function(e) {
-    console.log(e.target);
-    var closestCard = e.target.closest('.card');
-    var closestSpan = closestCard.childNodes[3].childNodes[0];
+function choose(e) {
+  console.log(e.target);
+  var closestCard = e.target.closest('.card');
+  var closestSpan = closestCard.childNodes[3].childNodes[0];
+  var flippedCards = document.getElementsByClassName('is-flipped');
 
-    //First flip
-    if (
-      closestCard.contains(e.target) &&
-      e.target.classList[0] === 'card-face' &&
-      !oneFlipped
-    ) {
+  //First flip
+  if (
+    closestCard.contains(e.target) &&
+    e.target.classList[0] === 'card-face' &&
+    flippedCards.length === 0
+  ) {
+    closestCard.classList.toggle('is-flipped');
+  }
+
+  //Second flip - Correct
+  else if (
+    flippedCards.length === 1 &&
+    e.target.classList[0] === 'card-face' &&
+    closestCard.contains(e.target) &&
+    flippedCards[0].childNodes[3].childNodes[0].style.backgroundImage ===
+      closestSpan.style.backgroundImage &&
+    flippedCards[0].childNodes[3].childNodes[0] !== closestSpan
+  ) {
+    flippedCards[0].style.transform = 'rotateY(180deg)';
+    closestSpan.parentNode.parentNode.style.transform = 'rotateY(180deg)';
+    document
+      .getElementsByClassName('is-flipped')[0]
+      .classList.toggle('is-flipped');
+  }
+
+  //Second flip - Incorrect
+  else if (
+    flippedCards.length === 1 &&
+    closestCard.contains(e.target) &&
+    e.target.classList[0] === 'card-face'
+  ) {
+    closestCard.classList.toggle('is-flipped');
+    window.setTimeout(function() {
       closestCard.classList.toggle('is-flipped');
-      oneFlipped = true;
-    }
-
-    //Second flip - Correct
-    else if (
-      e.target.classList[0] === 'card-face' &&
-      closestCard.contains(e.target) &&
-      oneFlipped &&
-      document.getElementsByClassName('is-flipped')[0].childNodes[3]
-        .childNodes[0].style.backgroundImage ===
-        closestSpan.style.backgroundImage &&
-      document.getElementsByClassName('is-flipped')[0].childNodes[3]
-        .childNodes[0] !== closestSpan
-    ) {
-      document.getElementsByClassName('is-flipped')[0].style.transform =
-        'rotateY(180deg)';
-      closestSpan.parentNode.parentNode.style.transform = 'rotateY(180deg)';
-      document
-        .getElementsByClassName('is-flipped')[0]
-        .classList.toggle('is-flipped');
-      oneFlipped = false;
-    }
-
-    //Second flip - Incorrect
-    else if (
-      closestCard.contains(e.target) &&
-      e.target.classList[0] === 'card-face' &&
-      oneFlipped
-    ) {
-      oneFlipped = false;
-      closestCard.classList.toggle('is-flipped');
-      window.setTimeout(function() {
-        closestCard.classList.toggle('is-flipped');
-        document
-          .getElementsByClassName('is-flipped')[0]
-          .classList.toggle('is-flipped');
-        document.getElementById('score').innerText = String(
-          +document.getElementById('score').innerText + 1
-        );
-      }, 1000);
-    }
-  };
+      flippedCards[0].classList.toggle('is-flipped');
+      document.getElementById('score').innerText = String(
+        +document.getElementById('score').innerText + 1
+      );
+    }, 1000);
+  }
 }
 
 // handlers
-var selected = choose();
 document.getElementById('new-game').addEventListener('click', newGame);
-document.getElementById('game-container').addEventListener('click', selected);
+document.getElementById('game-container').addEventListener('click', choose);
