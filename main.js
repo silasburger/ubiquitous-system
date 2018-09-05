@@ -29,21 +29,30 @@ function choose(e) {
 
   //First flip
   if (
+    flippedCards.length === 0 &&
     closestCard.contains(e.target) &&
-    e.target.classList[0] === 'card-face' &&
-    flippedCards.length === 0
+    (e.target.classList[0] === 'card-face' || e.target.classList[0] === 'image')
   ) {
     closestCard.classList.toggle('is-flipped');
   }
 
-  //Second flip - Correct
+  //Same
   else if (
     flippedCards.length === 1 &&
-    e.target.classList[0] === 'card-face' &&
+    closestCard.contains(e.target) &&
+    flippedCards[0].childNodes[3].childNodes[0] === closestSpan &&
+    (e.target.classList[0] === 'card-face' || e.target.classList[0] === 'image')
+  ) {
+    flippedCards[0].classList.toggle('is-flipped');
+  }
+
+  //Second flip - Correct
+  else if (
     closestCard.contains(e.target) &&
     flippedCards[0].childNodes[3].childNodes[0].style.backgroundImage ===
       closestSpan.style.backgroundImage &&
-    flippedCards[0].childNodes[3].childNodes[0] !== closestSpan
+    flippedCards[0].childNodes[3].childNodes[0] !== closestSpan &&
+    (e.target.classList[0] === 'card-face' || e.target.classList[0] === 'image')
   ) {
     flippedCards[0].style.transform = 'rotateY(180deg)';
     closestCard.style.transform = 'rotateY(180deg) rotateX(360deg)';
@@ -54,7 +63,7 @@ function choose(e) {
   else if (
     flippedCards.length === 1 &&
     closestCard.contains(e.target) &&
-    e.target.classList[0] === 'card-face'
+    (e.target.classList[0] === 'card-face' || e.target.classList[0] === 'image')
   ) {
     closestCard.classList.toggle('is-flipped');
     window.setTimeout(function() {
